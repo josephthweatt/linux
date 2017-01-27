@@ -1,4 +1,3 @@
-CONFIG_MODULE_SIG=n
 
 obj-m += Joseph_Thweatt.o
 
