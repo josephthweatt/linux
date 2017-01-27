@@ -1,0 +1,2 @@
+store this in the linux directory
+syscall_64.tbl is located in arch/x86/entry/syscalls

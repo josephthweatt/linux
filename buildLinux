@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo make -j2
+sudo make modules -j2
+sudo make modules_install -j2
+sudo make install -j2
+sudo update-grub
