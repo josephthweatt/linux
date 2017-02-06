@@ -8,6 +8,6 @@ int main() {
 	printf("Enter your username:\n");
 	scanf("%s", uname);
 
-	syscall(__NR_my_syscall);
+	syscall(__NR_my_syscall, uname);
 	return 0;
 }
