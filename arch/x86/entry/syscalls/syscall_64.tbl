@@ -336,6 +336,7 @@
 327	64	preadv2			sys_preadv2
 328	64	pwritev2		sys_pwritev2
 329	common	mycall			sys_mycall
+330	common	userprocs		sys_userprocs
 
 #
 # x32-specific system call numbers start at 512 to avoid cache impact
