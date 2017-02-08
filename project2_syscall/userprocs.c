@@ -1,20 +1,26 @@
+#include <linux/cred.h>
 #include <linux/syscalls.h>
+#include <linux/sched.h>
 #include <linux/kernel.h>
+
+#include <string.h>
+#include <stdio.h>
 
 asmlinkage long sys_userprocs (char uname[256]) {
 
+	struct task_struct *task = current;
 
+	printf("User\tPID\tTTY\tTime\tCommand\n");
+	for_each_process(task) {
 
-}
+		if (current_uid() == task->cred->uid) {
+			int time_in_seconds = task->utime / HZ;
 
+			printf("%s\t%d\t%s\t%d\t%s\n", 
+				uname, task->pid, task->signal->tty,
+				time_in_seconds, task->comm);
+		}
+	}
 
-/**
- * Trying to keep this systemcall clean, we may need to add
- * more code here, because I have no idea how we are getting
- * the process info.
- */
-void print_process (char uname[256], int pid, char tty[32],
-			char time [12], char command[256]) {
-
-	printf("%s\t%d\t%s\t%s\t%s\n", uname, pid, tty, time, command);
+	return 0;
 }
