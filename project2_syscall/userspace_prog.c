@@ -10,7 +10,7 @@ int main() {
 	printf("Enter your username:\n");
 	scanf("%s", uname);
 
-	//syscall(__NR_my_syscall, uname, task);
+	//syscall(__NR_my_syscall, uname, &task);
 	return_procs(uname, &task);
 
 	printf("User\tPID\tTTY\tTime\tCommand\n");
