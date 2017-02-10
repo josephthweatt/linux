@@ -15,9 +15,12 @@ int main() {
 
 	printf("User\tPID\tTTY\tTime\tCommand\n");
 
-	printf("\n%s\t%d\t%s\t%d\t%s\n", 
-				uname, task->pid, task->tty,
-				task->time_in_seconds, task->comm);
+	while (task) {
+		printf("\n%s\t%d\t%s\t%d\t%s\n", 
+					uname, task->pid, task->tty,
+					task->time_in_seconds, task->comm);
+		task = task->next;
+	}
 
 	return 0;
 }
