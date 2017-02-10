@@ -6,11 +6,11 @@
 #include <string.h>
 #include <stdio.h>
 
-asmlinkage long sys_userprocs (char uname[256]) {
+asmlinkage long sys_userprocs (char uname[256], task_struct *task) {
 
 	struct task_struct *task = current;
 
-	printf("User\tPID\tTTY\tTime\tCommand\n");
+	
 	for_each_process(task) {
 
 		if (current_uid() == task->cred->uid) {
