@@ -14,17 +14,25 @@ asmlinkage long sys_userprocs (struct user_proc **taskptr) {
 	unsigned int size = 0;
 	unsigned int proc_size = sizeof(struct user_proc);
 	struct task_struct *task = current;
-	struct user_proc *procs_head = NULL;
-	struct user_proc *proc = procs_head;
+	struct user_proc *procs_head, *proc;
 	
 	for_each_process(task) {
 
 		if (uid_eq(current_uid(), task->cred->uid)) {
+			prink("Found a user task");
+
+			if (!procs_head) {
+				proc = kmalloc(proc_size, GFP_KERNEL);
+				procs_head = proc;
+			} else {
+				proc->next = kmalloc(proc_size, GFP_KERNEL);
+				proc = proc->next;
+			}
+
 			int time_in_seconds = task->utime / HZ;
 
 			// assign the values in task to the struct defined in userprocs.h
 			// then add it to the linked list
-			proc = kmalloc(proc_size, GFP_KERNEL);
 			proc->pid = task->pid;
 			proc->tty = tty_name(task->signal->tty);
 			proc->time_in_seconds = time_in_seconds;
@@ -33,7 +41,6 @@ asmlinkage long sys_userprocs (struct user_proc **taskptr) {
 			printk("Pid of task is %d\n", task->pid);
 			printk("Pid of my proc is %d\n", proc->pid);
 
-			proc = proc->next;
 			size += proc_size;
 		}
 	}
