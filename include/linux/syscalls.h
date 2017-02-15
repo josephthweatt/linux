@@ -11,6 +11,9 @@
 #ifndef _LINUX_SYSCALLS_H
 #define _LINUX_SYSCALLS_H
 
+// Joseph's struct
+struct user_proc;
+
 struct epoll_event;
 struct iattr;
 struct inode;
@@ -899,6 +902,6 @@ asmlinkage long sys_copy_file_range(int fd_in, loff_t __user *off_in,
 asmlinkage long sys_mlock2(unsigned long start, size_t len, int flags);
 
 asmlinkage long sys_mycall(void);
-asmlinkage long sys_userprocs(task_struct **taskptr);
+asmlinkage long sys_userprocs(struct user_proc **taskptr);
 
 #endif

@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 // data for a user's process
 struct user_proc {
 	int pid;
@@ -10,4 +7,5 @@ struct user_proc {
 
 	struct user_proc *next;
 };
-void return_procs(char *uname, struct user_proc **taskptr);
+
+// void return_procs(char *uname, struct user_proc **taskptr);
